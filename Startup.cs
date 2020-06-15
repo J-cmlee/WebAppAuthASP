@@ -33,12 +33,13 @@ namespace WebAppAuth
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                //Add Roles to the website
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-                
-
+       
             services.AddControllersWithViews(config =>
             {
+                // This sets the requirement that user must be authenticated before accessing any page on the website
                 // using Microsoft.AspNetCore.Mvc.Authorization;
                 // using Microsoft.AspNetCore.Authorization;
                 var policy = new AuthorizationPolicyBuilder()
